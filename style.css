@@ -1,10 +1,28 @@
-body {
-    margin: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    color: white;
-    background-color: rgb(0, 0, 0);
-  }
+/* Reset margins and padding for HTML and body elements */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: white;
+  background-color: black;
+  font-family: 'Special Elite', cursive;
+}
+
+/* Create a container for your grid */
+.main-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100%; /* Set the height of the grid container to 100% */
+
+  grid-template-areas: 
+  "A A A"
+  "B C D"
+  "E E E";
+
+  justify-items: center;
+  align-items: center;
+}
 
 .list-container {
   width: 200px;
@@ -12,22 +30,86 @@ body {
 
 ul {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 li {
   color: white;
   background-color: black;
+  margin: 0.2em; /* Reset margin */
+  padding: 0.3em; /* Reset padding */
+  font-size: 1em;
+  border-radius: 5px;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
+ /* Hover on button before click 
+ mand som taster på sit tastatur
+ write text on typewriter effect
+ flertal?
+ loading prikker
+ add link to ref
+ */
+
 li:active {
-  background-color: lightblue; /* Change the background color when the item is clicked */
-  color: white; /* Change the text color when the item is clicked */
+  background-color: white; /* Change the background color when the item is clicked */
+  color: black; /* Change the text color when the item is clicked */
+}
+
+li:hover {
+  background-color: white;
+  color: black;
 }
 
 .selected {
-  background-color: lightblue; /* Change the background color when the item is clicked */
-  color: white; /* Change the text color when the item is clicked */
+  background-color: white; /* Change the background color when the item is clicked */
+  color: black; /* Change the text color when the item is clicked */
 }
 
-#comparison {
+#list1-container {
+  grid-area: B; /* Span both B and C */
+  justify-self: end;
+}
+
+#list2-container {
+  grid-area: D; /* Span C and D */
+  justify-self: start;
+}
+
+#man-container {
+  grid-area: C;
+}
+
+#man-el {
+  height: 650px;
+  width: auto; /* This will maintain the aspect ratio */
+}
+
+#text-container {
+  grid-area: E;
+  text-align: center;
+  align-self: start;
+}
+
+/* Selection color */
+
+/* Text selection color for modern browsers */
+::selection {
+  background-color: white; /* Example highlight color */
+  color: #0a0a0a; /* Example text color */
+}
+
+/* Text selection color for Firefox */
+::-moz-selection {
+  background-color: white; /* Example highlight color */
+  color: #0a0a0a; /* Example text color */
 }

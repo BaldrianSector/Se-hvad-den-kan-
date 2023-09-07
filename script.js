@@ -1,6 +1,9 @@
 // Hook for DOM
 
 const textEl = document.querySelector("#text-el")
+const manEl = document.querySelector("#man-el")
+
+manEl.src = "./img/man-sitting.png"
 
 let priceCatalog = {}
 
@@ -37,9 +40,11 @@ populatePriceCatalog("Netflix Abonnement", 114, "https://www.hvadkosterdet.dk/pr
 populatePriceCatalog("Parkeringsbøde", 830, "https://www.q-park.dk/da/nyheder/afgiftssats-2022/", "🅿", true)
 populatePriceCatalog("iPad Pro", 9999, undefined, undefined, true)
 populatePriceCatalog("iPhone 14 Pro", 10499, undefined, "📱", true)
-populatePriceCatalog("F-16", 14000000, undefined, "✈", false)
+populatePriceCatalog("Spids af en jetjager", 16000, "https://hvadkoster.dk/hvad-koster-spidsen-af-en-jetjager/", "🛩️", true)
 populatePriceCatalog("Tesla Model 3", 1185000, undefined, "⚡", true)
-populatePriceCatalog("Store bededag", 4300000, undefined, "⛪", true)
+populatePriceCatalog("Bondegård", 2500000, "https://hvadkoster.dk/hvad-koster-en-bondegaard/", "🚜", true)
+populatePriceCatalog("F-16 fly", 14000000, undefined, "✈", false)
+populatePriceCatalog("Store bededag", 3000000000, undefined, "⛪", true)
 populatePriceCatalog("Danmarks Radio", 3885000000, "https://www.dr.dk/om-dr/moeddr/tag-et-kig-i-drs-oekonomi-0", "📻", true)
 
 function logPriceCatalog() {
@@ -71,14 +76,14 @@ function readPrice(itemKey) {
 // Formats numbers with dots for readability and commas as separators for decimal numbers
 function formatNumber(number) {
     if (number > 0.01) {
-        const formattedNumber = number.toLocaleString('en-US', {
+        const formattedNumber = number.toLocaleString('da-DK', {
             minimumFractionDigits: 2, // Always show at least 2 decimal places
             maximumFractionDigits: 2, // Show a maximum of 2 decimal places
             useGrouping: true, // Use grouping separators (commas)
         });
         return formattedNumber;
     } else {
-        return number.toLocaleString('en-US', { maximumFractionDigits: 20 }); // Format smaller numbers without decimals to return the full number
+        return number.toLocaleString('da-DK', { maximumFractionDigits: 20 }); // Format smaller numbers without decimals to return the full number
     }
 }
 
@@ -169,7 +174,7 @@ list1Items.forEach((item) => {
         
         getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
         
-        textEl.innerText = comparisonResult
+        getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
     });
 });
 
@@ -194,7 +199,7 @@ list2Items.forEach((item) => {
         
         getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
         
-        textEl.innerText = comparisonResult
+        getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
     });
 });
 

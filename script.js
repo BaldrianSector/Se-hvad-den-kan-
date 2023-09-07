@@ -17,7 +17,7 @@ manEl.src = "./img/man-sitting.png"
 let priceCatalog = {}
 
 // Adds objects into priceCatalog as objects with key, itemName, price and a source if avaliable 
-function populatePriceCatalog(itemName, price, source = "missing", emoji = undefined, gender = undefined) {
+function populatePriceCatalog(itemName, price, source = "missing", emoji = undefined, gender = undefined, properNoun = false) {
     
     const key = convertNameToKey(itemName)
     
@@ -28,7 +28,8 @@ function populatePriceCatalog(itemName, price, source = "missing", emoji = undef
         "price": price,
         "source": source,
         "emoji": emoji,
-        "gender": gender
+        "gender": gender,
+        "properNoun": properNoun
     };
     
     // Add the item data to the priceCatalog using the provided key
@@ -43,23 +44,23 @@ function convertNameToKey(itemName) {
 
 // List of items in price, source, emoji, gender format
 
-populatePriceCatalog("Liter Letmælk", 11, "https://www.nemlig.com/dagligvarer/mejeri/maelk-floede/letmaelk", "🥛", true)
-populatePriceCatalog("Citronmåne", 20, "https://www.nemlig.com/citronmaane-904031", "🍰", true)
-populatePriceCatalog("Netflix Abonnement", 114, "https://www.hvadkosterdet.dk/project/hvad-koster-netflix/", "🍿", false)
-populatePriceCatalog("Parkeringsbøde", 830, "https://www.q-park.dk/da/nyheder/afgiftssats-2022/", "🅿", true)
-populatePriceCatalog("iPad Pro", 7999, "https://www.apple.com/dk/ipad/", undefined, true)
-populatePriceCatalog("iPhone 14 Pro", 10499, "https://www.apple.com/dk/shop/buy-iphone", "📱", true)
-populatePriceCatalog("Spids af en jetjager", 16000, "https://hvadkoster.dk/hvad-koster-spidsen-af-en-jetjager/", "🛩️", true)
-populatePriceCatalog("Tesla Model 3", 325710, "https://www.google.com/search?q=Tesla%20Model%203%20pris", "⚡", true)
-populatePriceCatalog("Bondegård", 2500000, "https://hvadkoster.dk/hvad-koster-en-bondegaard/", "🚜", true)
-populatePriceCatalog("F-16 fly", 101807260, "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104505/f-16-fighting-falcon/", "✈", false)
-populatePriceCatalog("Store bededag", 3000000000, "https://www.zetland.dk/historie/s851ngNL-a8dQKjjz-0c1ba", "⛪", true)
-populatePriceCatalog("Danmarks Radio", 3885000000, "https://www.dr.dk/om-dr/moeddr/tag-et-kig-i-drs-oekonomi-0", "📻", true)
+populatePriceCatalog("Liter Letmælk", 11, "https://www.nemlig.com/dagligvarer/mejeri/maelk-floede/letmaelk", "🥛", true, false)
+populatePriceCatalog("Citronmåne", 20, "https://www.nemlig.com/citronmaane-904031", "🍰", true, false)
+populatePriceCatalog("Netflix abonnement", 114, "https://www.hvadkosterdet.dk/project/hvad-koster-netflix/", "🍿", false, true)
+populatePriceCatalog("Parkeringsbøde", 830, "https://www.q-park.dk/da/nyheder/afgiftssats-2022/", "🅿️", true, false)
+populatePriceCatalog("iPad Pro", 7999, "https://www.apple.com/dk/ipad/", undefined, true, true)
+populatePriceCatalog("iPhone 14 Pro", 10499, "https://www.apple.com/dk/shop/buy-iphone", "📱", true, true)
+populatePriceCatalog("Spids af en jetjager", 16000, "https://hvadkoster.dk/hvad-koster-spidsen-af-en-jetjager/", "🛩️", true, false)
+populatePriceCatalog("Tesla Model 3", 325710, "https://www.google.com/search?q=Tesla%20Model%203%20pris", "⚡️", true, true)
+populatePriceCatalog("Bondegård", 2500000, "https://hvadkoster.dk/hvad-koster-en-bondegaard/", "🚜", true, false)
+populatePriceCatalog("F-16 fly", 101807260, "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104505/f-16-fighting-falcon/", "✈", false, true)
+populatePriceCatalog("Store bededag", 3000000000, "https://www.zetland.dk/historie/s851ngNL-a8dQKjjz-0c1ba", "⛪", true, false)
+populatePriceCatalog("Danmarks Radio", 3885000000, "https://www.dr.dk/om-dr/moeddr/tag-et-kig-i-drs-oekonomi-0", "📻", true, true)
 
 function logPriceCatalog() {
     for (const [key, value] of Object.entries(priceCatalog)) {
-        const {name, price, source, emoji, gender} = value; // Destructure the value object
-        console.log(`Item Key: ${key}, Name: ${name}, Price: ${price}, Source: ${source}, Emoji: ${emoji}, Gender: ${gender}`)
+        const {name, price, source, emoji, gender, properNoun} = value; // Destructure the value object
+        console.log(`Item Key: ${key}, Name: ${name}, Price: ${price}, Source: ${source}, Emoji: ${emoji}, Gender: ${gender}, Proper Noun: ${properNoun}`)
     }
 }
 
@@ -104,11 +105,26 @@ function compareItems(item1, item2) {
     const value1 = readValue(convertNameToKey(item1), "price");
     const value2 = readValue(convertNameToKey(item2), "price");
     
-    const itemName1 = readValue(item1,"name");
-    const itemName2 = readValue(item2,"name");
+    const item1ProperNoun = readValue(item1, "properNoun");
+    const item2ProperNoun = readValue(item2, "properNoun");
+    
+    let itemName1, itemName2;
+    
+    if (item1ProperNoun === true) {
+        itemName1 = readValue(item1, "name");
+    } else {
+        itemName1 = readValue(item1, "name").toLowerCase();
+    }
+    
+    if (item2ProperNoun === true) {
+        itemName2 = readValue(item2, "name");
+    } else {
+        itemName2 = readValue(item2, "name").toLowerCase();
+    }
 
     const link1 = readValue(item1,"source");
     const link2 = readValue(item2,"source");
+    
     
     // Clear the previous comparisonResult
     comparisonResult = "";
@@ -278,5 +294,5 @@ function typeWriter(text, link1, link2) {
             clearPreviousText(); // Clear the previous text one more time
             typeCharacter(); // Start typing animation
         }, loadingDelay);
-    }, 1800);
+    }, 1900);
 }

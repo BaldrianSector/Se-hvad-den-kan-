@@ -53,7 +53,7 @@ function logPriceCatalog() {
 
 // Returns the value of an item with the given parameter
 function readValue(itemKey, parameter) {
-    console.log(`Reading value of: ${itemKey} to value ${priceCatalog[itemKey][parameter]}`);
+    console.log(`Reading ${parameter} of "${itemKey}" to value ${priceCatalog[itemKey][parameter]}`);
     return priceCatalog[itemKey][parameter];
 }
 
@@ -138,6 +138,9 @@ const list1Items = document.querySelectorAll("#list1 li");
 const list2Items = document.querySelectorAll("#list2 li");
 
 let selectedItems = []
+let clickedItemKey1 = ""
+let clickedItemKey2 = ""
+
 
 // Add click event listeners to list1 items
 list1Items.forEach((item) => {
@@ -153,12 +156,12 @@ list1Items.forEach((item) => {
     // Log the value of the clicked item
     const clickedItemValue1 = item.textContent;
     selectedItems[0] = clickedItemValue1
-    console.log(`Clicked item value: ${clickedItemValue1}`);
-    
-    console.log(convertNameToKey(selectedItems[0]))
-    console.log(convertNameToKey(selectedItems[1]))
 
-    // getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Items not selected yet.")
+    clickedItemKey1 = convertNameToKey(selectedItems[0])
+
+    console.log(`Clicked item value: "${clickedItemValue1}" in list 1 with an itemKey of "${clickedItemKey1}"`);
+
+    getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
 
 });
 });
@@ -177,13 +180,12 @@ list2Items.forEach((item) => {
     // Log the value of the clicked item
     const clickedItemValue2 = item.textContent;
     selectedItems[1] = clickedItemValue2
-    console.log(selectedItems[1])
-    console.log(`Clicked item name: ${clickedItemValue2} with a value of ${readPrice(convertNameToKey(clickedItemValue2))}`);
     
-    console.log(convertNameToKey(selectedItems[0]))
-    console.log(convertNameToKey(selectedItems[1]))
+    clickedItemKey2 = convertNameToKey(selectedItems[1])
+
+    console.log(`Clicked item value: "${clickedItemValue2}" in list 2 with an itemKey of "${clickedItemKey2}"`);
     
-    // getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Two items has not been selected yet.")
+    getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
   });
 });
 

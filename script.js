@@ -112,6 +112,9 @@ function compareItems(item1, item2) {
     
     const itemName1 = readValue(item1,"name");
     const itemName2 = readValue(item2,"name");
+
+    const link1 = readValue(item1,"source");
+    const link2 = readValue(item2,"source");
     
     // Clear the previous comparisonResult
     comparisonResult = "";
@@ -119,10 +122,10 @@ function compareItems(item1, item2) {
     console.log(`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}`);
 
     // Build the new comparisonResult
-    comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}. Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1}.`);
+    comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2} * \n Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1} *`);
     
     // Call the typeWriter function to display the comparisonResult with a typing effect
-    typeWriter(comparisonResult);
+    typeWriter(comparisonResult, link1, link2);
     
     return "compareItems() has been completed";
 }
@@ -189,9 +192,7 @@ list1Items.forEach((item) => {
         
         console.log(`Clicked item value: "${clickedItemValue1}" in list 1 with an itemKey of "${clickedItemKey1}"`);
         
-        getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
-        
-        // getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
+        getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.") 
     });
 });
 
@@ -215,8 +216,6 @@ list2Items.forEach((item) => {
         console.log(`Clicked item value: "${clickedItemValue2}" in list 2 with an itemKey of "${clickedItemKey2}"`);
         
         getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
-        
-        // getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
     });
 });
 
@@ -226,23 +225,48 @@ function getSelectedItemCount() {
 }
 
 // Function to display text with a loading animation and typing effect
-function typeWriter(text) {
+function typeWriter(text, link1, link2) {
     let i = 0;
-    const speed = 35 + Math.random() * 50; // Typing speed between 50 and 100 milliseconds
-    const loadingDelay = 500; // Delay of 500 milliseconds
+
+    const speed = 65; // Typing speed in milliseconds
+    const loadingDelay = 500; // Delay before typing starts in milliseconds
 
     let typingTimeout; // Store the timeout ID
+    let asteriskCounter = 0; // Declare asteriskCounter outside of typeCharacter
 
     function typeCharacter() {
         if (i < text.length) {
-            document.getElementById("text-el").innerHTML = text.substring(0, i + 1); // Clear the previous text and add the new characters
+            
+            let character = text.charAt(i);
+            
+            // Handle special characters
+            if (character === "*" && asteriskCounter === 0) {
+                
+                // If the character is "*" and asteriskCounter is 0 and link2 is not missing
+                link2 !== "missing" ? character = `<a href="${link2}" target="_blank">*</a>`: character = ""
+                asteriskCounter++
+            } else if (character === "*" && asteriskCounter === 1) {
+
+                // If the character is "*" and asteriskCounter is 1 and link1 is not missing
+                link1 !== "missing" ? character = `<a href="${link1}" target="_blank">*</a>`: character = ""
+            } 
+            if (character === "\n") {
+                // If the character is a newline, add a line break
+                character = `<br>`;
+            }
+            // Append the new character to the existing content
+            document.getElementById("text-el").innerHTML += character;
             i++;
             typingTimeout = setTimeout(typeCharacter, speed);
         }
     }
 
     // Clear the previous text
-    document.getElementById("text-el").innerHTML = "";
+    function clearPreviousText() {
+        document.getElementById("text-el").innerHTML = "";
+    }
+
+    clearPreviousText();
 
     // Display loading animation with three dots
     document.getElementById("text-el").innerHTML = "";
@@ -254,7 +278,11 @@ function typeWriter(text) {
     }, 1200);
     setTimeout(() => {
         document.getElementById("text-el").innerHTML = "...";
+
         // Start typing animation after the loading delay
-        setTimeout(typeCharacter, loadingDelay);
+        setTimeout(() => {
+            clearPreviousText(); // Clear the previous text one more time
+            typeCharacter(); // Start typing animation
+        }, loadingDelay);
     }, 1800);
 }

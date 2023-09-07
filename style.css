@@ -5,13 +5,13 @@ html, body {
   height: 100%;
   color: white;
   background-color: black;
-  font-family: 'Special Elite', cursive;
+  font-family: 'Special Elite', 'Courier', cursive;
 }
 
 /* Create a container for your grid */
 .main-container {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   height: 100%; /* Set the height of the grid container to 100% */
 
@@ -90,6 +90,7 @@ li:hover {
   grid-area: E;
   text-align: center;
   align-self: start;
+  line-height: 2em;
 }
 
 /* Selection color */
@@ -104,4 +105,10 @@ li:hover {
 ::-moz-selection {
   background-color: white; /* Example highlight color */
   color: #0a0a0a; /* Example text color */
+}
+
+/* Links */
+a {
+  color: white;
+  text-decoration: none;
 }

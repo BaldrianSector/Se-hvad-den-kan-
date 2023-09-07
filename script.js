@@ -64,14 +64,14 @@ function readPrice(itemKey) {
 
 
 
-// Formats numbers to 2 decimals **** Needs edgecase protection against values less than 0.00 ****
+// Formats numbers to 2 decimals **** Needs edge case protection against values less than 0.01 ****
 function formatNumber(number) {
-    if (number < 0.00) {
-    const maximumDecimalPlaces = 2;
-    const formattedNumber = number.toFixed(maximumDecimalPlaces);
-    return formattedNumber
+    if (number > 0.01) {
+        const maximumDecimalPlaces = 2;
+        const formattedNumber = number.toFixed(maximumDecimalPlaces);
+        return formattedNumber;
     } else {
-        return number
+        return number;
     }
 }
 
@@ -93,6 +93,7 @@ function compareItems(item1,item2) {
     const itemName2 = readValue(item2,"name")
         
     console.log(`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}`);
+    return "compareItems has been completed"
 }
 
 // Output: En item1 svarter til x item2. Det vil sige at en 1 koster en 1/x'ne del af en item2. En item1 koster x gange så meget som en item2.

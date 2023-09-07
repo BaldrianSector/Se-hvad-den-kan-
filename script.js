@@ -15,9 +15,6 @@ const manEl = document.querySelector("#man-el")
 
 manEl.src = "./img/man-sitting.png"
 
-// Global variable to track if the typeWriter function is running
-let isTyping = false;
-
 // Initialise priceCatalog
 
 let priceCatalog = {}

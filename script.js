@@ -1,9 +1,24 @@
+// TO DO LIST:
+
+ /* Hover on button before click 
+ mand som taster på sit tastatur
+ write text on typewriter effect
+ flertal?
+ loading prikker
+ sound of clicks
+ add link to ref */
+
 // Hook for DOM
 
 const textEl = document.querySelector("#text-el")
 const manEl = document.querySelector("#man-el")
 
 manEl.src = "./img/man-sitting.png"
+
+// Global variable to track if the typeWriter function is running
+let isTyping = false;
+
+// Initialise priceCatalog
 
 let priceCatalog = {}
 
@@ -54,12 +69,6 @@ function logPriceCatalog() {
     }
 }
 
-// Isert all items into a dropdown list
-// Let user select items
-// add Eventlistener to check when items has been chosen
-// calculate difference bewteen items 
-
-
 // Returns the value of an item with the given parameter
 function readValue(itemKey, parameter) {
     console.log(`Reading ${parameter} of "${itemKey}" to value ${priceCatalog[itemKey][parameter]}`);
@@ -96,18 +105,26 @@ function article(itemKey) {
     } else return ""    
 }
 
-// Compares and devides 2 items
-function compareItems(item1,item2) {
-    const value1 = readValue(convertNameToKey(item1), "price")
-    const value2 = readValue(convertNameToKey(item2), "price")
+// Compares and divides 2 items
+function compareItems(item1, item2) {
+    const value1 = readValue(convertNameToKey(item1), "price");
+    const value2 = readValue(convertNameToKey(item2), "price");
     
-    const itemName1 = readValue(item1,"name")
-    const itemName2 = readValue(item2,"name")
+    const itemName1 = readValue(item1,"name");
+    const itemName2 = readValue(item2,"name");
+    
+    // Clear the previous comparisonResult
+    comparisonResult = "";
     
     console.log(`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}`);
 
-    comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}. Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1}.`)
-    return "compareItems() has been completed"
+    // Build the new comparisonResult
+    comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2}. Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1}.`);
+    
+    // Call the typeWriter function to display the comparisonResult with a typing effect
+    typeWriter(comparisonResult);
+    
+    return "compareItems() has been completed";
 }
 
 // Function to populate both lists with items from priceCatalog
@@ -174,7 +191,7 @@ list1Items.forEach((item) => {
         
         getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
         
-        getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
+        // getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
     });
 });
 
@@ -199,11 +216,45 @@ list2Items.forEach((item) => {
         
         getSelectedItemCount() === 2 ? console.log(compareItems(clickedItemKey1,clickedItemKey2)) : console.log("Two items has not been selected yet.")
         
-        getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
+        // getSelectedItemCount() === 2 ? textEl.innerText = comparisonResult : ""
     });
 });
 
 function getSelectedItemCount() {
     const selectedItems = document.querySelectorAll(".selected");
     return selectedItems.length;
+}
+
+// Function to display text with a loading animation and typing effect
+function typeWriter(text) {
+    let i = 0;
+    const speed = 35 + Math.random() * 50; // Typing speed between 50 and 100 milliseconds
+    const loadingDelay = 500; // Delay of 500 milliseconds
+
+    let typingTimeout; // Store the timeout ID
+
+    function typeCharacter() {
+        if (i < text.length) {
+            document.getElementById("text-el").innerHTML = text.substring(0, i + 1); // Clear the previous text and add the new characters
+            i++;
+            typingTimeout = setTimeout(typeCharacter, speed);
+        }
+    }
+
+    // Clear the previous text
+    document.getElementById("text-el").innerHTML = "";
+
+    // Display loading animation with three dots
+    document.getElementById("text-el").innerHTML = "";
+    setTimeout(() => {
+        document.getElementById("text-el").innerHTML = ".";
+    }, 600);
+    setTimeout(() => {
+        document.getElementById("text-el").innerHTML = "..";
+    }, 1200);
+    setTimeout(() => {
+        document.getElementById("text-el").innerHTML = "...";
+        // Start typing animation after the loading delay
+        setTimeout(typeCharacter, loadingDelay);
+    }, 1800);
 }

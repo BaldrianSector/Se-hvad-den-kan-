@@ -52,14 +52,6 @@ li {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
- /* Hover on button before click 
- mand som taster på sit tastatur
- write text on typewriter effect
- flertal?
- loading prikker
- add link to ref
- */
-
 li:active {
   background-color: white; /* Change the background color when the item is clicked */
   color: black; /* Change the text color when the item is clicked */

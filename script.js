@@ -1,12 +1,9 @@
 // TO DO LIST:
 
- /* Hover on button before click 
- mand som taster på sit tastatur
- write text on typewriter effect
- flertal?
- loading prikker
- sound of clicks
- add link to ref */
+ /* mand som taster på sit tastatur
+ flertal + naturlig tekst?
+ put data into JSON file
+ sound of clicks */
 
 // Hook for DOM
 
@@ -44,19 +41,19 @@ function convertNameToKey(itemName) {
     return itemName.replace(/\s+/g, '-').toLowerCase()
 }
 
-// List of items **** Put this into JSON file ****
+// List of items in price, source, emoji, gender format
 
 populatePriceCatalog("Liter Letmælk", 11, "https://www.nemlig.com/dagligvarer/mejeri/maelk-floede/letmaelk", "🥛", true)
 populatePriceCatalog("Citronmåne", 20, "https://www.nemlig.com/citronmaane-904031", "🍰", true)
 populatePriceCatalog("Netflix Abonnement", 114, "https://www.hvadkosterdet.dk/project/hvad-koster-netflix/", "🍿", false)
 populatePriceCatalog("Parkeringsbøde", 830, "https://www.q-park.dk/da/nyheder/afgiftssats-2022/", "🅿", true)
-populatePriceCatalog("iPad Pro", 9999, undefined, undefined, true)
-populatePriceCatalog("iPhone 14 Pro", 10499, undefined, "📱", true)
+populatePriceCatalog("iPad Pro", 7999, "https://www.apple.com/dk/ipad/", undefined, true)
+populatePriceCatalog("iPhone 14 Pro", 10499, "https://www.apple.com/dk/shop/buy-iphone", "📱", true)
 populatePriceCatalog("Spids af en jetjager", 16000, "https://hvadkoster.dk/hvad-koster-spidsen-af-en-jetjager/", "🛩️", true)
-populatePriceCatalog("Tesla Model 3", 1185000, undefined, "⚡", true)
+populatePriceCatalog("Tesla Model 3", 325710, "https://www.google.com/search?q=Tesla%20Model%203%20pris", "⚡", true)
 populatePriceCatalog("Bondegård", 2500000, "https://hvadkoster.dk/hvad-koster-en-bondegaard/", "🚜", true)
-populatePriceCatalog("F-16 fly", 14000000, undefined, "✈", false)
-populatePriceCatalog("Store bededag", 3000000000, undefined, "⛪", true)
+populatePriceCatalog("F-16 fly", 101807260, "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104505/f-16-fighting-falcon/", "✈", false)
+populatePriceCatalog("Store bededag", 3000000000, "https://www.zetland.dk/historie/s851ngNL-a8dQKjjz-0c1ba", "⛪", true)
 populatePriceCatalog("Danmarks Radio", 3885000000, "https://www.dr.dk/om-dr/moeddr/tag-et-kig-i-drs-oekonomi-0", "📻", true)
 
 function logPriceCatalog() {

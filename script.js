@@ -3,6 +3,8 @@
  /* mand som taster på sit tastatur
  flertal + naturlig tekst?
  put data into JSON file
+ stop running functions
+ clean png mask and center
  sound of clicks */
 
 // Hook for DOM
@@ -42,7 +44,7 @@ function convertNameToKey(itemName) {
     return itemName.replace(/\s+/g, '-').toLowerCase()
 }
 
-// List of items in price, source, emoji, gender format
+// List of items in price, source, emoji, gender, properNoun format
 
 populatePriceCatalog("Liter Letmælk", 11, "https://www.nemlig.com/dagligvarer/mejeri/maelk-floede/letmaelk", "🥛", true, false)
 populatePriceCatalog("Citronmåne", 20, "https://www.nemlig.com/citronmaane-904031", "🍰", true, false)
@@ -79,7 +81,9 @@ function readPrice(itemKey) {
 
 // Formats numbers with dots for readability and commas as separators for decimal numbers
 function formatNumber(number) {
-    if (number > 0.01) {
+    if (number === 1.00){
+        return 1
+    } else if (number > 0.001) {
         const formattedNumber = number.toLocaleString('da-DK', {
             minimumFractionDigits: 2, // Always show at least 2 decimal places
             maximumFractionDigits: 2, // Show a maximum of 2 decimal places
@@ -87,7 +91,7 @@ function formatNumber(number) {
         });
         return formattedNumber;
     } else {
-        return number.toLocaleString('da-DK', { maximumFractionDigits: 20 }); // Format smaller numbers without decimals to return the full number
+        return number.toLocaleString('da-DK', { maximumFractionDigits: 10 }); // Format smaller numbers without decimals to return the full number
     }
 }
 

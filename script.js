@@ -40,7 +40,7 @@ populatePriceCatalog("Danmarks Radio", 3885000000, "https://www.dr.dk/om-dr/moed
 
 function logPriceCatalog() {
     for (const [key, value] of Object.entries(priceCatalog)) {
-        const { name, price, source, emoji, gender} = value; // Destructure the value object
+        const {name, price, source, emoji, gender} = value; // Destructure the value object
         console.log(`Item Key: ${key}, Name: ${name}, Price: ${price}, Source: ${source}, Emoji: ${emoji}, Gender: ${gender}`)
     }
 }
@@ -53,7 +53,7 @@ function logPriceCatalog() {
 
 // Returns the value of an item with the given parameter
 function readValue(itemKey, parameter) {
-    console.log(priceCatalog[itemKey][parameter]);
+    console.log(`Reading value of: ${itemKey} to value ${priceCatalog[itemKey][parameter]}`);
     return priceCatalog[itemKey][parameter];
 }
 
@@ -86,9 +86,9 @@ function article(itemKey) {
 
 // Compares and devides 2 items
 function compareItems(item1,item2) {
-    const value1 = readValue(item1, "price")
-    const value2 = readValue(item2, "price")
-
+    const value1 = readValue(convertNameToKey(item1), "price")
+    const value2 = readValue(convertNameToKey(item2), "price")
+    
     const itemName1 = readValue(item1,"name")
     const itemName2 = readValue(item2,"name")
         
@@ -151,12 +151,16 @@ list1Items.forEach((item) => {
     item.classList.add("selected");
 
     // Log the value of the clicked item
-    const clickedItemValue = item.textContent;
-    selectedItems[0] = clickedItemValue
-    console.log(selectedItems[0])
-    console.log(`Clicked item value: ${clickedItemValue}`);
-    getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Items not selected yet.")
-  });
+    const clickedItemValue1 = item.textContent;
+    selectedItems[0] = clickedItemValue1
+    console.log(`Clicked item value: ${clickedItemValue1}`);
+    
+    console.log(convertNameToKey(selectedItems[0]))
+    console.log(convertNameToKey(selectedItems[1]))
+
+    // getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Items not selected yet.")
+
+});
 });
 
 // Add click event listeners to list2 items
@@ -171,11 +175,15 @@ list2Items.forEach((item) => {
     item.classList.add("selected");
 
     // Log the value of the clicked item
-    const clickedItemValue = item.textContent;
-    selectedItems[1] = clickedItemValue
+    const clickedItemValue2 = item.textContent;
+    selectedItems[1] = clickedItemValue2
     console.log(selectedItems[1])
-    console.log(`Clicked item value: ${clickedItemValue}`);
-    getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Items not selected yet.")
+    console.log(`Clicked item name: ${clickedItemValue2} with a value of ${readPrice(convertNameToKey(clickedItemValue2))}`);
+    
+    console.log(convertNameToKey(selectedItems[0]))
+    console.log(convertNameToKey(selectedItems[1]))
+    
+    // getSelectedItemCount() === 2 ? console.log(compareItems(convertNameToKey(selectedItems[0],convertNameToKey(selectedItems[1])))) : console.log("Two items has not been selected yet.")
   });
 });
 

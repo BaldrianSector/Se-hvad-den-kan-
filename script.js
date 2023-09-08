@@ -5,6 +5,7 @@
  put data into JSON file
  stop running functions
  clean png mask and center
+ typewriter title when working
  sound of clicks */
 
 // Hook for DOM

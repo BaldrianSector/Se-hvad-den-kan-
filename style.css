@@ -3,7 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  color: white;
+  color: whitesmoke;
   background-color: black;
   font-family: 'Special Elite', 'Courier', cursive;
 }
@@ -36,7 +36,7 @@ ul {
 }
 
 li {
-  color: white;
+  color: whitesmoke;
   background-color: black;
   margin: 0.2em; /* Reset margin */
   padding: 0.3em; /* Reset padding */
@@ -53,17 +53,17 @@ li {
 }
 
 li:active {
-  background-color: white; /* Change the background color when the item is clicked */
+  background-color: whitesmoke; /* Change the background color when the item is clicked */
   color: black; /* Change the text color when the item is clicked */
 }
 
 li:hover {
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
 }
 
 .selected {
-  background-color: white; /* Change the background color when the item is clicked */
+  background-color: whitesmoke; /* Change the background color when the item is clicked */
   color: black; /* Change the text color when the item is clicked */
 }
 
@@ -97,18 +97,18 @@ li:hover {
 
 /* Text selection color for modern browsers */
 ::selection {
-  background-color: white; /* Example highlight color */
+  background-color: whitesmoke; /* Example highlight color */
   color: #0a0a0a; /* Example text color */
 }
 
 /* Text selection color for Firefox */
 ::-moz-selection {
-  background-color: white; /* Example highlight color */
+  background-color: whitesmoke; /* Example highlight color */
   color: #0a0a0a; /* Example text color */
 }
 
 /* Links */
 a {
-  color: white;
+  color: whitesmoke;
   text-decoration: none;
 }

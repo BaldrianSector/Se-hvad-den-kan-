@@ -88,7 +88,7 @@ function readPrice(itemKey) {
 function formatNumber(number) {
     if (number === 1.00){
         return 1
-    } else if (number > 0.001) {
+    } else if (number > 0.01) {
         const formattedNumber = number.toLocaleString('da-DK', {
             minimumFractionDigits: 2, // Always show at least 2 decimal places
             maximumFractionDigits: 2, // Show a maximum of 2 decimal places

@@ -13,7 +13,7 @@
 const textEl = document.querySelector("#text-el")
 const manEl = document.querySelector("#man-el")
 
-manEl.src = "./img/man-sitting.png"
+manEl.src = "./img/man-sitting-transparent-background.png"
 
 // Initialise priceCatalog
 

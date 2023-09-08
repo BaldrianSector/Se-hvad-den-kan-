@@ -6,6 +6,10 @@
  stop running functions
  clean png mask and center
  typewriter title when working
+ animations, clicks, thinking
+ comments in HTML
+ png. not selectable
+ fix on iphone
  sound of clicks */
 
 // Hook for DOM

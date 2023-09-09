@@ -84,6 +84,9 @@ li:hover {
 #man-el {
   height: 650px;
   width: auto; /* This will maintain the aspect ratio */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; /* Avoid user selection on pictures */
 }
 
 #text-container {

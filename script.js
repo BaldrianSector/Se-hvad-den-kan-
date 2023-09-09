@@ -4,13 +4,12 @@
  flertal + naturlig tekst?
  put data into JSON file
  stop running functions
- clean png mask and center
  typewriter title when working
+ add credits in the that are typed out if clicked
  animations, clicks, thinking
  comments in HTML
- png. not selectable
  fix on iphone
- sound of clicks */
+ sounds of clicks */
 
 // Hook for DOM
 

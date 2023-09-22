@@ -3,7 +3,6 @@
  /* mand som taster på sit tastatur
  flertal + naturlig tekst?
  put data into JSON file
- stop running functions
  typewriter title when working
  add credits in the that are typed out if clicked
  animations, clicks, thinking
@@ -143,7 +142,7 @@ function compareItems(item1, item2) {
     comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2} * \n Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1} *`);
     
     // Call the typeWriter function to display the comparisonResult with a typing effect
-    typeWriter(textEl, comparisonResult)
+    typeWriter(textEl, comparisonResult, link1, link2)
     
     return "compareItems() has been completed";
 }
@@ -244,16 +243,37 @@ function getSelectedItemCount() {
 
 let intervalId; // Declare the intervalId variable outside the function
 
-function typeWriter(textElement, text) {
+function typeWriter(textElement, text, link1, link2) {
     // Clear the previous interval if it exists
     clearInterval(intervalId);
 
     let originalText = text.split("");
     let typedText = [];
+    let asteriskCounter = 0
 
     intervalId = setInterval(function () {
         if (originalText.length > 0) {
-            typedText.push(originalText.shift());
+
+            let character = originalText[0];
+            console.log(`Current letter is: ${character}`)
+
+            // Handle special characters
+            if (character === "*" && asteriskCounter === 0) {
+                
+                // If the character is "*" and asteriskCounter is 0 and link2 is not missing
+                link2 !== "missing" ? character = `<a href="${link2}" target="_blank">*</a>`: character = ""
+                asteriskCounter++
+            } else if (character === "*" && asteriskCounter === 1) {
+
+                // If the character is "*" and asteriskCounter is 1 and link1 is not missing
+                link1 !== "missing" ? character = `<a href="${link1}" target="_blank">*</a>`: character = ""
+            } else if (character === "\n") {
+                // If the character is a newline, add a line break
+                character = `<br>`;
+            }             
+            // Append the new character to the existing content
+            originalText.shift()
+            typedText.push(character)
             textElement.innerHTML = typedText.join("");
         } else {
             clearInterval(intervalId);

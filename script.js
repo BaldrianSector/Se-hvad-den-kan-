@@ -3,6 +3,7 @@
  /* mand som taster på sit tastatur
  flertal + naturlig tekst?
  put data into JSON file
+ loading function (...)
  typewriter title when working
  add credits in the that are typed out if clicked
  animations, clicks, thinking

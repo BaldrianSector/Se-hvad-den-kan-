@@ -143,7 +143,7 @@ function compareItems(item1, item2) {
     comparisonResult = (`${article(item1)} ${itemName1} svarer til ${formatNumber(value1/value2)} ${itemName2} * \n Det betyder at ${article(item2).toLowerCase()} ${itemName2} svarer til ${formatNumber(value2/value1)} ${itemName1} *`);
     
     // Call the typeWriter function to display the comparisonResult with a typing effect
-    typeWriter(comparisonResult, link1, link2);
+    typeWriter(textEl, comparisonResult)
     
     return "compareItems() has been completed";
 }
@@ -242,65 +242,22 @@ function getSelectedItemCount() {
     return selectedItems.length;
 }
 
-// Function to display text with a loading animation and typing effect
-function typeWriter(text, link1, link2) {
-    let i = 0;
+let intervalId; // Declare the intervalId variable outside the function
 
-    const speed = 65; // Typing speed in milliseconds
-    const loadingDelay = 500; // Delay before typing starts in milliseconds
+function typeWriter(textElement, text) {
+    // Clear the previous interval if it exists
+    clearInterval(intervalId);
 
-    let typingTimeout; // Store the timeout ID
-    let asteriskCounter = 0; // Declare asteriskCounter outside of typeCharacter
+    let originalText = text.split("");
+    let typedText = [];
 
-    function typeCharacter() {
-        if (i < text.length) {
-            
-            let character = text.charAt(i);
-            
-            // Handle special characters
-            if (character === "*" && asteriskCounter === 0) {
-                
-                // If the character is "*" and asteriskCounter is 0 and link2 is not missing
-                link2 !== "missing" ? character = `<a href="${link2}" target="_blank">*</a>`: character = ""
-                asteriskCounter++
-            } else if (character === "*" && asteriskCounter === 1) {
-
-                // If the character is "*" and asteriskCounter is 1 and link1 is not missing
-                link1 !== "missing" ? character = `<a href="${link1}" target="_blank">*</a>`: character = ""
-            } 
-            if (character === "\n") {
-                // If the character is a newline, add a line break
-                character = `<br>`;
-            }
-            // Append the new character to the existing content
-            document.getElementById("text-el").innerHTML += character;
-            i++;
-            typingTimeout = setTimeout(typeCharacter, speed);
+    intervalId = setInterval(function () {
+        if (originalText.length > 0) {
+            typedText.push(originalText.shift());
+            textElement.innerHTML = typedText.join("");
+        } else {
+            clearInterval(intervalId);
+            // This typing animation is complete.
         }
-    }
-
-    // Clear the previous text
-    function clearPreviousText() {
-        document.getElementById("text-el").innerHTML = "";
-    }
-
-    clearPreviousText();
-
-    // Display loading animation with three dots
-    document.getElementById("text-el").innerHTML = "";
-    setTimeout(() => {
-        document.getElementById("text-el").innerHTML = ".";
-    }, 600);
-    setTimeout(() => {
-        document.getElementById("text-el").innerHTML = "..";
-    }, 1200);
-    setTimeout(() => {
-        document.getElementById("text-el").innerHTML = "...";
-
-        // Start typing animation after the loading delay
-        setTimeout(() => {
-            clearPreviousText(); // Clear the previous text one more time
-            typeCharacter(); // Start typing animation
-        }, loadingDelay);
-    }, 1900);
+    }, 65); // Set the interval to 65 milliseconds
 }

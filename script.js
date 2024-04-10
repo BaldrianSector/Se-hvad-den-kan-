@@ -3,7 +3,6 @@
  /* mand som taster på sit tastatur
  flertal + naturlig tekst?
  put data into JSON file
- stop running functions
  typewriter title when working
  add credits in the that are typed out if clicked
  animations, clicks, thinking
@@ -53,9 +52,10 @@ function convertNameToKey(itemName) {
 populatePriceCatalog("Liter Letmælk", 11, "https://www.nemlig.com/dagligvarer/mejeri/maelk-floede/letmaelk", "🥛", true, false)
 populatePriceCatalog("Citronmåne", 20, "https://www.nemlig.com/citronmaane-904031", "🍰", true, false)
 populatePriceCatalog("Netflix abonnement", 114, "https://www.hvadkosterdet.dk/project/hvad-koster-netflix/", "🍿", false, true)
+populatePriceCatalog("Airfryer", 799, "https://www.apple.com/dk/shop/buy-iphone", "♨️", true, false)
 populatePriceCatalog("Parkeringsbøde", 830, "https://www.q-park.dk/da/nyheder/afgiftssats-2022/", "🅿️", true, false)
 populatePriceCatalog("iPad Pro", 7999, "https://www.apple.com/dk/ipad/", undefined, true, true)
-populatePriceCatalog("iPhone 14 Pro", 10499, "https://www.apple.com/dk/shop/buy-iphone", "📱", true, true)
+populatePriceCatalog("iPhone 15 Pro", 9799, "https://www.apple.com/dk/shop/buy-iphone", "📱", true, true)
 populatePriceCatalog("Spids af en jetjager", 16000, "https://hvadkoster.dk/hvad-koster-spidsen-af-en-jetjager/", "🛩️", true, false)
 populatePriceCatalog("Tesla Model 3", 325710, "https://www.google.com/search?q=Tesla%20Model%203%20pris", "⚡️", true, true)
 populatePriceCatalog("Bondegård", 2500000, "https://hvadkoster.dk/hvad-koster-en-bondegaard/", "🚜", true, false)
